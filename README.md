@@ -2,23 +2,25 @@
 Git Repository of java examples for Solent Students for COM504 Object oriented design and development.
 
 ## Contents
-The repository contains a number of example projects, weekly exercises and an area for you to create and store your own work during the course 'myPracticeCourseWork'. Please read and follow the Getting Started instructions before doing anything else.
+The repository contains a number of example projects, weekly exercises and an area for you to create and store your own work during the course 'myPracticeCourseWork'. 
+Please read and follow the Getting Started instructions before doing anything else.
 
 [myPracticeCourseWork](../master/myPracticeCourseWork) This is where you should create and save your own practice projects.
 
-[maven-setup](../master/maven-setup) This contains scripts to help you set the java class path and install maven if necessary.
+[session1](../master/session1/) Initial exercises for the course.
 
-[week1](../master/week1/) Initial exercises for the course.
+## Prerequisites
+In order to complete these exercises you will need Java 8 or 11, Netbeans 8 or 12, Tomcat, Maven and git installed on your machine. Seperate installation instructions have been provided if you dont have this software installed already.
 
-PLEASE NOTE that the class PC's should now have maven pre-installed so these steps in [maven-setup](../master/maven-setup) not necessary on all machines. 
-
+[maven-setup](../master/maven-setup) DEPRICATED: This contains scripts to help you set the java class path and temporarily install maven on university machines which dont support maven. 
+PLEASE NOTE that the university lab PC's should now have maven pre-installed so these steps in [maven-setup](../master/maven-setup) are not necessary on all machines. 
 
 ## Getting Started with GIT
 Before doing anything else you will need to follow these getting started instructions.
 This will teach you a little bit about git and how to fork a copy of this repository into your own github account.
 
-You will then be able to clone your fork locally and then follow the instructions in the [maven-setup](../master/week1/maven-setup) project to get javac and maven working. 
-After this you can then proceed to doing the exercises in [week1](../master/week1/).
+You will then be able to clone your fork locally and then follow the instructions in the [maven-setup](../master/session1/maven-setup) project to get javac and maven working. 
+After this you can then proceed to doing the exercises in [session1](../master/session1/).
 
 ### Introduction to GIT
 To be a professional developer, you will need to become proficient at using version control systems.
@@ -30,8 +32,9 @@ In recent years many open source projects have migrated their code base to githu
 The principle advantage of git over other version control systems is that it is completely distributed. When you use git you clone a complete local copy of the repository you are cloning (usually referred to as the origin). You can develop code and save your changes in your local repository completely off line. At a later stage you may wish to push your changes to the on line repository or pull changes others have made into your local copy. 
 
 There are many on line tutorials on using git and it will be worth while spending some time on these to get proficient. e.g.
- https://try.github.io/ Resources to learn Git
- https://guides.github.com/introduction/git-handbook/ Git Handbook 
+* https://try.github.io/ Resources to learn Git
+* https://guides.github.com/introduction/git-handbook/ Git Handbook 
+* https://learngitbranching.js.org/ provides a very useful interactive tutorial on branching and merging.
  
 Many IDE's including Netbeans support git natively, but it is very important to learn to use the git command line independently of the IDE so that you have more control over what is happening.
 
@@ -44,6 +47,11 @@ git add --all (a command to stage all of the current changes ready for a commit)
 git commit -m 'my commit message' (a command to commit changes to your local repository)
 git push (a command to push your latest commits up to the remote repository)
 ```
+
+### IMPORTANT GitHub Security
+Github no longer accepts a simple username and password for accessing accounts. 
+Please see the page on [Github Security](../master/githubsecurity.md) to see how to set up certificates to access your github account from the university machines.
+
 ### Forking the solent2Public repo
 You could just clone the master solent2Public repo and work on the clone locally. 
 However you do not have write permissions to this repo and so you couldn't save (or push) any changes or work you have added.
@@ -51,7 +59,7 @@ Therefore, to be able to use the examples and save your own work, it will be bet
 
 You should open your own personal github account and FORK this repository into your own account. 
 This will give you your own copy to work with and a backup of your work on github.
-PLEASE NOTE, while github is very reliable, you should also keep a backup copy of your repo in case anything goes wrong.
+PLEASE NOTE, while github is very reliable, you should also keep a local backup copy of your repo in case anything goes wrong.
 
 To create a fork of this repository
 1. sign in to your own github account
@@ -70,18 +78,28 @@ Rather than just clone the repository into a workspace on your IDE, it is good p
 You can import separate projects from this clone into your IDE workspace as you need to work on them.
 
 Create a git repo folder on your local drive and clone your fork of solent2Public into it.
+
+DO NOT check out your repository onto a network (e.g. U:) drive or a One Drive location. 
+The time latency in these drives can cause git to fail.
+
+I usually create a git repository close the the root of the C: drive (e.g. C:/devel/gitrepos/solent2Public)
+
 ```
 mkdir gitrepos
 cd gitrepos
 git clone https://github.com/ {your github id }/solent2Public.git
 ```
+Important:  if using SSH keys use
+```
+git clone  git@github.com:{your github id }/solent2Public.git
+```
 
 You should now have a clone of your fork in your gitrepos directory
 gitrepos/solent2Public
 
-You can see how to open projects in this repo using gthe Netbeans IDE in the exercises under
+You can see how to open projects in this repo using the Netbeans IDE in the exercises under
 
-[maven-test-exercise](../master/week1/maven-test-exercise)
+[maven-test-exercise](../master/session1/maven-test-exercise)
 
 ### hidden files .git and .gitignore
 You should set the view on your windows file explorer to show hidden files and file extensions. 
@@ -101,8 +119,6 @@ You should also ensure that in most cases IDE specific sub folders and files are
 
 The example [.gitignore](../master/.gitignore)  should be suitable for most purposes and should be copied into the top level of your git repository.
 
-
-
 ### Syncing with the upstream repo
 I will be adding stuff to the upstream repo each week and you should be able to pull these into your local repo using the procedure described below.
 
@@ -115,19 +131,41 @@ $ git remote -v
 origin  https://github.com/{ your github id}/solent2Public.git (fetch)
 origin  https://github.com/{ your github id}/solent2Public.git (push)
 ```
+if you are using SSH keys this will be
+```
+$ git remote -v
+origin  git@github.com:{ your github id}/solent2Public.git (fetch)
+origin  git@github.com:{ your github id}/solent2Public.git (push)
+```
 
 To sync with the upstream repo you need to add another remote repository
 ```
 $ git remote add upstream https://github.com/gallenc/solent2Public.git
+```
+NOTE even if you are using SSH to acces your repo, use https to access the upstream repo because you do not need a password or certificates to pull a public repo.
 
+To see the upstream repositories use
+```
 $ git remote -v
 origin  https://github.com/{ your github id}/solent2Public.git (fetch)
 origin  https://github.com/{ your github id}/solent2Public.git (push)
 upstream        https://github.com/gallenc/solent2Public.git (fetch)
 upstream        https://github.com/gallenc/solent2Public.git (push)
-
 ```
-Now, you can keep your own fork of solent2Public synced with the upstream repository with a few Git commands.
+if you are using SSH this will be
+```
+$ git remote -v
+origin  git@github.com:{ your github id}/solent2Public.git (fetch)
+origin  git@github.com:{ your github id}/solent2Public.git (push)
+upstream        https://github.com/gallenc/solent2Public.git (fetch)
+upstream        https://github.com/gallenc/solent2Public.git (push)
+```
+
+Note that git calls the github repository which your repository is linked to 'origin'.
+This is the respository on github where where push commands normally send the changes.
+The 'upstream' repository is an alternative repository from which you pull additional content for merging with your work.
+
+Having made these changes you can now keep your own fork of solent2Public synced with the class examples in the upstream repository using a few Git commands.
 
 1. Fetch the branches and their respective commits from the upstream repository. 
 Commits to master will be stored in a local branch, upstream/master.
@@ -166,7 +204,7 @@ Fast-forward
 ```
 Your local master branch should now contain all the changes from the upstream repository.
 
-4. You should check in these changes to your own repository
+4. You should push these changes to your own repository on github.
 
 ```
 git status
@@ -193,9 +231,9 @@ nothing to commit, working directory clean
 ```
 
 ## Summary
-to synchronise your repository with the upstream use the following commands
+To synchronise your repository with the upstream use the following commands
 
-if you have not set up the upstream repo
+If you have not set up the upstream repo
 ```
 git remote add upstream https://github.com/gallenc/solent2Public.git
 ```
@@ -219,6 +257,3 @@ https://help.github.com/articles/syncing-a-fork/
 https://help.github.com/articles/configuring-a-remote-for-a-fork/
 
 
-
-
-  
